@@ -1,4 +1,4 @@
-# Mendelbrot-set  by Moroz Vitalik 143 A2
+# Mandelbrot set by Moroz Vitalik 143 A2
 
 Я не знаю який IDE/Code redactor ви використовуєте (я використовую [VSCode](https://code.visualstudio.com/) і інструкція буде по тому як запустити це на VSCode).
 
