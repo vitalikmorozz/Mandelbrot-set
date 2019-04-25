@@ -61,6 +61,11 @@ int main()
 					minXcords += w;
 					maxXcords += w;
 				}
+				//Screenshot
+				if (e.key.code == sf::Keyboard::Key::P)
+				{
+					image.saveToFile("./img.jpg");
+				}
 			}
 			if (e.type == sf::Event::MouseWheelScrolled)
 			{
