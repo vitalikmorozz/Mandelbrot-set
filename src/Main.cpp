@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 // SFML
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -10,7 +11,7 @@ const int W = 960;
 const int H = 540;
 
 int maxIteration = 100;
-int zoom;
+int zoom = 1;
 const int zoomValue = 5;
 double minXcords = -2.5, maxXcords = 1;
 double minYcords = -1, maxYcords = 1;
@@ -23,6 +24,17 @@ int main()
 	sf::Texture texture;
 	sf::Sprite sprite;
 
+	sf::Font font;
+	if (!font.loadFromFile("./arial.ttf"))
+	{
+		std::cout << "Font not loaded!!!";
+	}
+
+	sf::Text text;
+	text.setFont(font);
+	text.setColor(sf::Color::Blue);
+	text.setCharacterSize(16);
+
 	while (window.isOpen())
 	{
 		sf::Event e;
@@ -32,12 +44,14 @@ int main()
 				window.close();
 			if (e.type == sf::Event::KeyPressed)
 			{
+				//Reset feature
 				if (e.key.code == sf::Keyboard::Key::R)
 				{
 					minXcords = -2.5;
 					maxXcords = 1;
 					minYcords = -1;
 					maxYcords = 1;
+					zoom = 1;
 				}
 				double w = (maxXcords - minXcords) / 5;
 				double h = (maxYcords - minYcords) / 5;
@@ -61,7 +75,7 @@ int main()
 					minXcords += w;
 					maxXcords += w;
 				}
-				//Screenshot
+				//Screenshot feature
 				if (e.key.code == sf::Keyboard::Key::P)
 				{
 					image.saveToFile("./img.jpg");
@@ -107,26 +121,37 @@ int main()
 					maxYcords = newCenterY + (maxYcords - minYcords) / zoomValue;
 					minYcords = tempMin;
 
-					zoom*=5;
+					zoom *= 5;
 				}
 
 				//Right Click to ZoomOut
 				if (e.mouseButton.button == sf::Mouse::Right)
 				{
 					//New max/min cords for x/y
-					double tempMin = newCenterX - (maxXcords - minXcords) * zoomValue;
-					maxXcords = newCenterX + (maxXcords - minXcords) * zoomValue;
+					double tempMin = newCenterX - (maxXcords - minXcords) / 2 * zoomValue;
+					maxXcords = newCenterX + (maxXcords - minXcords) / 2 * zoomValue;
 					minXcords = tempMin;
 
-					tempMin = newCenterY - (maxYcords - minYcords) * zoomValue;
-					maxYcords = newCenterY + (maxYcords - minYcords) * zoomValue;
+					tempMin = newCenterY - (maxYcords - minYcords) / 2 * zoomValue;
+					maxYcords = newCenterY + (maxYcords - minYcords) / 2 * zoomValue;
 					minYcords = tempMin;
 
-					zoom/=5;
+					if (minXcords <= -2.5 && maxXcords >= 1 && minYcords <= -1 && maxYcords >= 1)
+					{
+						minXcords = -2.5;
+						maxXcords = 1;
+						minYcords = -1;
+						maxYcords = 1;
+						zoom = 1;
+					}
+
+					zoom /= 5;
+					if (zoom == 0){
+						zoom = 1;
+					}
 				}
 			}
 		}
-		window.clear();
 
 		//Fractal img
 		for (int y = 0; y < H; y++)
@@ -152,7 +177,12 @@ int main()
 			}
 		texture.loadFromImage(image);
 		sprite.setTexture(texture);
+		std::string txt = "Current zoom : " + std::to_string(zoom) + "\nMax iterations : " + std::to_string(maxIteration);
+		text.setString(txt);
+		window.clear();
+
 		window.draw(sprite);
+		window.draw(text);
 
 		window.display();
 	}
