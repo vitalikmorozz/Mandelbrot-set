@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <math.h>
 // SFML
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -10,7 +11,7 @@
 const int W = 960;
 const int H = 540;
 
-int maxIteration = 100;
+int maxIteration = 128;
 int zoom = 1;
 const int zoomValue = 5;
 double minXcords = -2.5, maxXcords = 1;
@@ -81,6 +82,7 @@ int main()
 					image.saveToFile("./img.jpg");
 				}
 			}
+			//Increase Max Iterations
 			if (e.type == sf::Event::MouseWheelScrolled)
 			{
 				if (e.MouseWheelScrolled)
@@ -90,15 +92,15 @@ int main()
 					{
 						if (e.mouseWheelScroll.delta > 0)
 						{
-							maxIteration += 100;
+							maxIteration += 128;
 						}
 
 						else
 						{
-							if (maxIteration == 100)
-								maxIteration = 100;
+							if (maxIteration == 128)
+								maxIteration = 128;
 							else
-								maxIteration -= 100;
+								maxIteration -= 128;
 						}
 					}
 				}
@@ -146,7 +148,8 @@ int main()
 					}
 
 					zoom /= 5;
-					if (zoom == 0){
+					if (zoom == 0)
+					{
 						zoom = 1;
 					}
 				}
@@ -171,9 +174,55 @@ int main()
 						break;
 					;
 				}
-				int Red = 1.0 * (maxIteration - iteration) / maxIteration * 0xff;
-				int Green = Red, Blue = Red;
-				image.setPixel(x, y, sf::Color(Red, Green, Blue));
+
+				//Colouring
+				//Total of 7 ranges of colors. 3 of them are in the red color zone, R moves from 0 to 255 and G and B are constantly 0.
+				//The next 4 ranges are in the orange to yellow color zone, R is constantly 255, G moves from 0 to 255 and B is constantly 0.
+				if (iteration == maxIteration)
+				{
+					sf::Color color(0, 0, 0);
+					image.setPixel(x, y, color);
+				}
+				else if (iteration < (maxIteration / 8))
+				{
+					sf::Color color(iteration * 2, 0, 0);
+					image.setPixel(x, y, color);
+				}
+				else if (iteration < (maxIteration / 7))
+				{
+					sf::Color color((((iteration - (maxIteration / 8)) * 128) / 126) + 128, 0, 0);
+					image.setPixel(x, y, color);
+				}
+				else if (iteration < (maxIteration / 6))
+				{
+					sf::Color color((((iteration - (maxIteration / 7)) * 62) / 127) + 193, 0, 0);
+					image.setPixel(x, y, color);
+				}
+				else if (iteration < (maxIteration / 5))
+				{
+					sf::Color color(255, (((iteration - (maxIteration / 6)) * 62) / 255) + 1, 0);
+					image.setPixel(x, y, color);
+				}
+				else if (iteration < (maxIteration / 4))
+				{
+					sf::Color color(255, (((iteration - (maxIteration / 5)) * 63) / 511) + 64, 0);
+					image.setPixel(x, y, color);
+				}
+				else if (iteration < (maxIteration / 3))
+				{
+					sf::Color color(255, (((iteration - (maxIteration / 4)) * 63) / 1023) + 128, 0);
+					image.setPixel(x, y, color);
+				}
+				else if (iteration < (maxIteration / 2))
+				{
+					sf::Color color(255, (((iteration - (maxIteration / 3)) * 63) / 2047) + 192, 0);
+					image.setPixel(x, y, color);
+				}
+				else
+				{
+					sf::Color color(255, 255, 0);
+					image.setPixel(x, y, color);
+				}
 			}
 		texture.loadFromImage(image);
 		sprite.setTexture(texture);
