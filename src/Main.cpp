@@ -8,18 +8,19 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 
-const int W = 960;
-const int H = 540;
+const int W = 1366;
+const int H = 768;
 
 int maxIteration = 128;
 int zoom = 1;
 const int zoomValue = 5;
 double minXcords = -2.5, maxXcords = 1;
 double minYcords = -1, maxYcords = 1;
+bool m = 1;
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(W, H), "Mendelbrot Set");
+	sf::RenderWindow window(sf::VideoMode(W, H), "Mendelbrot Set", sf::Style::Fullscreen);
 	sf::Image image;
 	image.create(W, H);
 	sf::Texture texture;
@@ -31,10 +32,20 @@ int main()
 		std::cout << "Font not loaded!!!";
 	}
 
-	sf::Text text;
-	text.setFont(font);
-	text.setColor(sf::Color::Blue);
-	text.setCharacterSize(16);
+	sf::Text info, controls, menu;
+	info.setFont(font);
+	info.setColor(sf::Color::Blue);
+	info.setCharacterSize(16);
+
+	controls.setFont(font);
+	controls.setColor(sf::Color::Blue);
+	controls.setCharacterSize(16);
+	controls.setPosition(0, H - 145);
+
+	menu.setFont(font);
+	menu.setColor(sf::Color::Blue);
+	menu.setCharacterSize(16);
+	menu.setPosition(0, H - 20);
 
 	while (window.isOpen())
 	{
@@ -80,6 +91,11 @@ int main()
 				if (e.key.code == sf::Keyboard::Key::P)
 				{
 					image.saveToFile("./img.jpg");
+				}
+				if (e.key.code == sf::Keyboard::Key::M)
+				{
+					if(m) m = 0;
+					else m = 1;
 				}
 			}
 			//Increase Max Iterations
@@ -226,12 +242,26 @@ int main()
 			}
 		texture.loadFromImage(image);
 		sprite.setTexture(texture);
-		std::string txt = "Current zoom : " + std::to_string(zoom) + "\nMax iterations : " + std::to_string(maxIteration);
-		text.setString(txt);
+
+		std::string infoText = "Current zoom : " + std::to_string(zoom) + "\nMax iterations : " + std::to_string(maxIteration);
+		info.setString(infoText);
+
+		std::string controlsText = "Navigation:\nMove: W/A/S/D\nZoom In: Left Click\nZoom Out: Right Click\nReset Zoom: R\nMake Screenshot: P\nIncrease Max Iteration: Scroll Up\nDecrease Max Iteration: Scroll Down";
+		controls.setString(controlsText);
+
+		std::string menuText = "Show menu: M";
+		menu.setString(menuText);
+
 		window.clear();
 
 		window.draw(sprite);
-		window.draw(text);
+		window.draw(info);
+		if (m)
+		{
+			window.draw(menu);
+		}
+		else
+			window.draw(controls);
 
 		window.display();
 	}
