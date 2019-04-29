@@ -4,7 +4,7 @@ I personaly use [VSCode](https://code.visualstudio.com/) so instruction will be 
 
 **Instruction is for WINDOWS**
 
-#Instalation
+# Instalation
 1. Download & Extract [SFML](https://www.sfml-dev.org/files/SFML-2.5.1-windows-gcc-7.3.0-mingw-32-bit.zip) to C:/SFML-2.5.1/ 
 2. Download & Extract [MinGW](https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/7.3.0/threads-posix/dwarf/i686-7.3.0-release-posix-dwarf-rt_v5-rev0.7z/download) to C:/mingw32/ 
 3. Clone this repo to your machine.
