@@ -2,54 +2,63 @@
 #include <string>
 #include <math.h>
 // SFML
-#include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
 
+//Main settings
 const int W = 1366;
 const int H = 768;
+const int zoomValue = 5;
 
 int maxIteration = 128;
 int zoom = 1;
-const int zoomValue = 5;
-double minXcords = -2.5, maxXcords = 1;
-double minYcords = -1, maxYcords = 1;
-bool m = 1;
+double minRealCords = -2.5, maxRealCords = 1;
+double minImCords = -1, maxImCords = 1;
+bool m = 1, c = 1;
+
+//Function that calculate color between two given colours a and b, depending on given number t (0 < t <= 1)
+sf::Color colorInterpolate(sf::Color a, sf::Color b, double t)
+{
+	if (a.r < b.r && a.g < b.g && a.b < b.b)
+		return {round(a.r + abs(b.r - a.r) * t), round(a.g + abs(b.g - a.g) * t), round(a.b + abs(b.b - a.b) * t)};
+	else
+		return {round(a.r - abs(b.r - a.r) * t), round(a.g - abs(b.g - a.g) * t), round(a.b - abs(b.b - a.b) * t)};
+}
 
 int main()
 {
+	//Window setup
 	sf::RenderWindow window(sf::VideoMode(W, H), "Mendelbrot Set", sf::Style::Fullscreen);
+
 	sf::Image image;
 	image.create(W, H);
 	sf::Texture texture;
 	sf::Sprite sprite;
-
+	sf::Event e;
+	//Font checking
 	sf::Font font;
 	if (!font.loadFromFile("./arial.ttf"))
 	{
 		std::cout << "Font not loaded!!!";
 	}
-
+	//Info text setup
 	sf::Text info, controls, menu;
 	info.setFont(font);
-	info.setColor(sf::Color::Blue);
+	info.setColor(sf::Color::Black);
 	info.setCharacterSize(16);
-
+	//Navigation text setup
 	controls.setFont(font);
-	controls.setColor(sf::Color::Blue);
+	controls.setColor(sf::Color::Black);
 	controls.setCharacterSize(16);
-	controls.setPosition(0, H - 145);
-
+	controls.setPosition(0, H - 185);
+	//Menu text setup
 	menu.setFont(font);
-	menu.setColor(sf::Color::Blue);
+	menu.setColor(sf::Color::Black);
 	menu.setCharacterSize(16);
 	menu.setPosition(0, H - 20);
-
+	//Main loop
 	while (window.isOpen())
 	{
-		sf::Event e;
 		while (window.pollEvent(e))
 		{
 			if (e.type == sf::Event::Closed)
@@ -59,46 +68,69 @@ int main()
 				//Reset feature
 				if (e.key.code == sf::Keyboard::Key::R)
 				{
-					minXcords = -2.5;
-					maxXcords = 1;
-					minYcords = -1;
-					maxYcords = 1;
+					minRealCords = -2.5;
+					maxRealCords = 1;
+					minImCords = -1;
+					maxImCords = 1;
 					zoom = 1;
 				}
-				double w = (maxXcords - minXcords) / 5;
-				double h = (maxYcords - minYcords) / 5;
+				//Camera Move
+				double w = (maxRealCords - minRealCords) / 5;
+				double h = (maxImCords - minImCords) / 5;
 				if (e.key.code == sf::Keyboard::Key::W)
 				{
-					minYcords -= h;
-					maxYcords -= h;
+					minImCords -= h;
+					maxImCords -= h;
 				}
 				if (e.key.code == sf::Keyboard::Key::S)
 				{
-					minYcords += h;
-					maxYcords += h;
+					minImCords += h;
+					maxImCords += h;
 				}
 				if (e.key.code == sf::Keyboard::Key::A)
 				{
-					minXcords -= w;
-					maxXcords -= w;
+					minRealCords -= w;
+					maxRealCords -= w;
 				}
 				if (e.key.code == sf::Keyboard::Key::D)
 				{
-					minXcords += w;
-					maxXcords += w;
+					minRealCords += w;
+					maxRealCords += w;
 				}
-				//Screenshot feature
+				//Make screenshot
 				if (e.key.code == sf::Keyboard::Key::P)
-				{
 					image.saveToFile("./img.jpg");
-				}
+				//Menu open/close
 				if (e.key.code == sf::Keyboard::Key::M)
 				{
-					if(m) m = 0;
-					else m = 1;
+					if (m)
+						m = 0;
+					else
+						m = 1;
 				}
+				//Change colouring scheme
+				if (e.key.code == sf::Keyboard::Key::C)
+				{
+					if (c)
+					{
+						c = 0;
+						info.setColor(sf::Color::White);
+						controls.setColor(sf::Color::White);
+						menu.setColor(sf::Color::White);
+					}
+					else
+					{
+						c = 1;
+						info.setColor(sf::Color::Black);
+						controls.setColor(sf::Color::Black);
+						menu.setColor(sf::Color::Black);
+					}
+				}
+				//Close window
+				if (e.key.code == sf::Keyboard::Key::Escape)
+					window.close();
 			}
-			//Increase Max Iterations
+			//Increase Max Iterations count
 			if (e.type == sf::Event::MouseWheelScrolled)
 			{
 				if (e.MouseWheelScrolled)
@@ -124,20 +156,20 @@ int main()
 			if (e.type == sf::Event::MouseButtonPressed)
 			{
 				//Calculate new center in mouse point
-				double newCenterX = minXcords + (maxXcords - minXcords) * e.mouseButton.x / W;
-				double newCenterY = minYcords + (maxYcords - minYcords) * e.mouseButton.y / H;
+				double newCenterX = minRealCords + (maxRealCords - minRealCords) * e.mouseButton.x / W;
+				double newCenterY = minImCords + (maxImCords - minImCords) * e.mouseButton.y / H;
 
 				//Left Click to ZoomIn
 				if (e.mouseButton.button == sf::Mouse::Left)
 				{
-					//New max/min cords for x/y
-					double tempMin = newCenterX - (maxXcords - minXcords) / zoomValue;
-					maxXcords = newCenterX + (maxXcords - minXcords) / zoomValue;
-					minXcords = tempMin;
+					//New max/min cords for Real/Im
+					double tempMin = newCenterX - (maxRealCords - minRealCords) / zoomValue;
+					maxRealCords = newCenterX + (maxRealCords - minRealCords) / zoomValue;
+					minRealCords = tempMin;
 
-					tempMin = newCenterY - (maxYcords - minYcords) / zoomValue;
-					maxYcords = newCenterY + (maxYcords - minYcords) / zoomValue;
-					minYcords = tempMin;
+					tempMin = newCenterY - (maxImCords - minImCords) / zoomValue;
+					maxImCords = newCenterY + (maxImCords - minImCords) / zoomValue;
+					minImCords = tempMin;
 
 					zoom *= 5;
 				}
@@ -145,29 +177,27 @@ int main()
 				//Right Click to ZoomOut
 				if (e.mouseButton.button == sf::Mouse::Right)
 				{
-					//New max/min cords for x/y
-					double tempMin = newCenterX - (maxXcords - minXcords) / 2 * zoomValue;
-					maxXcords = newCenterX + (maxXcords - minXcords) / 2 * zoomValue;
-					minXcords = tempMin;
+					//New max/min cords for Real/Im
+					double tempMin = newCenterX - (maxRealCords - minRealCords) / 2 * zoomValue;
+					maxRealCords = newCenterX + (maxRealCords - minRealCords) / 2 * zoomValue;
+					minRealCords = tempMin;
 
-					tempMin = newCenterY - (maxYcords - minYcords) / 2 * zoomValue;
-					maxYcords = newCenterY + (maxYcords - minYcords) / 2 * zoomValue;
-					minYcords = tempMin;
+					tempMin = newCenterY - (maxImCords - minImCords) / 2 * zoomValue;
+					maxImCords = newCenterY + (maxImCords - minImCords) / 2 * zoomValue;
+					minImCords = tempMin;
 
-					if (minXcords <= -2.5 && maxXcords >= 1 && minYcords <= -1 && maxYcords >= 1)
+					if (minRealCords <= -2.5 && maxRealCords >= 1 && minImCords <= -1 && maxImCords >= 1)
 					{
-						minXcords = -2.5;
-						maxXcords = 1;
-						minYcords = -1;
-						maxYcords = 1;
+						minRealCords = -2.5;
+						maxRealCords = 1;
+						minImCords = -1;
+						maxImCords = 1;
 						zoom = 1;
 					}
 
 					zoom /= 5;
 					if (zoom == 0)
-					{
 						zoom = 1;
-					}
 				}
 			}
 		}
@@ -176,8 +206,8 @@ int main()
 		for (int y = 0; y < H; y++)
 			for (int x = 0; x < W; x++)
 			{
-				double scaledX = minXcords + (maxXcords - minXcords) * x / W;
-				double scaledY = minYcords + (maxYcords - minYcords) * y / H;
+				double scaledX = minRealCords + (maxRealCords - minRealCords) * x / W;
+				double scaledY = minImCords + (maxImCords - minImCords) * y / H;
 				double a = 0, b = 0;
 				int iteration;
 				for (iteration = 0; iteration < maxIteration; iteration++)
@@ -190,81 +220,73 @@ int main()
 						break;
 					;
 				}
-
-				//Colouring
-				//Total of 7 ranges of colors. 3 of them are in the red color zone, R moves from 0 to 255 and G and B are constantly 0.
-				//The next 4 ranges are in the orange to yellow color zone, R is constantly 255, G moves from 0 to 255 and B is constantly 0.
-				if (iteration == maxIteration)
+				//Colouring schemes
+				std::vector<sf::Color> colors;
+				if (!c)
 				{
-					sf::Color color(0, 0, 0);
-					image.setPixel(x, y, color);
-				}
-				else if (iteration < (maxIteration / 8))
-				{
-					sf::Color color(iteration * 2, 0, 0);
-					image.setPixel(x, y, color);
-				}
-				else if (iteration < (maxIteration / 7))
-				{
-					sf::Color color((((iteration - (maxIteration / 8)) * 128) / 126) + 128, 0, 0);
-					image.setPixel(x, y, color);
-				}
-				else if (iteration < (maxIteration / 6))
-				{
-					sf::Color color((((iteration - (maxIteration / 7)) * 62) / 127) + 193, 0, 0);
-					image.setPixel(x, y, color);
-				}
-				else if (iteration < (maxIteration / 5))
-				{
-					sf::Color color(255, (((iteration - (maxIteration / 6)) * 62) / 255) + 1, 0);
-					image.setPixel(x, y, color);
-				}
-				else if (iteration < (maxIteration / 4))
-				{
-					sf::Color color(255, (((iteration - (maxIteration / 5)) * 63) / 511) + 64, 0);
-					image.setPixel(x, y, color);
-				}
-				else if (iteration < (maxIteration / 3))
-				{
-					sf::Color color(255, (((iteration - (maxIteration / 4)) * 63) / 1023) + 128, 0);
-					image.setPixel(x, y, color);
-				}
-				else if (iteration < (maxIteration / 2))
-				{
-					sf::Color color(255, (((iteration - (maxIteration / 3)) * 63) / 2047) + 192, 0);
-					image.setPixel(x, y, color);
+					//Red colouring
+					colors = {
+						{0, 0, 0},
+						{213, 67, 31},
+						{251, 255, 121},
+						{62, 223, 89},
+						{43, 30, 218},
+						{0, 255, 247}};
 				}
 				else
 				{
-					sf::Color color(255, 255, 0);
-					image.setPixel(x, y, color);
+					//Standart colouring
+					colors = {
+						{0, 7, 100},
+						{32, 107, 203},
+						{237, 255, 255},
+						{255, 170, 0},
+						{0, 2, 0}};
 				}
+
+				//Calculate number t (0 < t <=1), depending on iterations
+				double t;
+				int colorSectionPix = maxIteration / (colors.size() - 1);
+				if (iteration < colorSectionPix)
+					t = (double)iteration / (double)colorSectionPix;
+				else
+					t = (double)(iteration % colorSectionPix) / (double)colorSectionPix;
+
+				//Find necesary two colors for point
+				int i = 0;
+				sf::Color imgColor;
+				while ((i + 1) * colorSectionPix <= iteration)
+					i++;
+				if (iteration == maxIteration)
+					imgColor = {0, 0, 0};
+				else
+					imgColor = colorInterpolate(colors[i], colors[i + 1], t);
+				//Colouring each pixel
+				image.setPixel(x, y, sf::Color(imgColor));
 			}
+		//Transform our fractal image to texture and then to sprite
 		texture.loadFromImage(image);
 		sprite.setTexture(texture);
-
-		std::string infoText = "Current zoom : " + std::to_string(zoom) + "\nMax iterations : " + std::to_string(maxIteration);
+		//Zoom and Max Iteration info text
+		std::string infoText = "Current zoom: x" + std::to_string(zoom) + "\nMax iterations: " + std::to_string(maxIteration);
 		info.setString(infoText);
-
-		std::string controlsText = "Navigation:\nMove: W/A/S/D\nZoom In: Left Click\nZoom Out: Right Click\nReset Zoom: R\nMake Screenshot: P\nIncrease Max Iteration: Scroll Up\nDecrease Max Iteration: Scroll Down";
+		//Navigation info text
+		std::string controlsText = "Navigation:\nMove: W/A/S/D\nZoom In: Left Click\nZoom Out: Right Click\nReset Zoom: R\nMake Screenshot: P\nIncrease Max Iteration: Scroll Up\nDecrease Max Iteration: Scroll Down\nChange colouring: C\nClose: Escape";
 		controls.setString(controlsText);
-
+		//"Show menu" text
 		std::string menuText = "Show menu: M";
 		menu.setString(menuText);
 
 		window.clear();
-
+		//Drawing all texts and Mandelbro sprite
 		window.draw(sprite);
 		window.draw(info);
 		if (m)
-		{
 			window.draw(menu);
-		}
 		else
 			window.draw(controls);
-
+		//Displaying result picture
 		window.display();
 	}
-
 	return 0;
 }

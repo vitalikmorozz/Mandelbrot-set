@@ -1,4 +1,5 @@
-bin/Debug/obj/Main.o: src/Main.cpp C:/SFML-2.5.1/include/SFML/System.hpp \
+bin/Debug/obj/Main.o: src/Main.cpp C:/SFML-2.5.1/include/SFML/Window.hpp \
+ C:/SFML-2.5.1/include/SFML/System.hpp \
  C:/SFML-2.5.1/include/SFML/Config.hpp \
  C:/SFML-2.5.1/include/SFML/System/Clock.hpp \
  C:/SFML-2.5.1/include/SFML/System/Export.hpp \
@@ -24,7 +25,6 @@ bin/Debug/obj/Main.o: src/Main.cpp C:/SFML-2.5.1/include/SFML/System.hpp \
  C:/SFML-2.5.1/include/SFML/System/Vector2.inl \
  C:/SFML-2.5.1/include/SFML/System/Vector3.hpp \
  C:/SFML-2.5.1/include/SFML/System/Vector3.inl \
- C:/SFML-2.5.1/include/SFML/Window.hpp \
  C:/SFML-2.5.1/include/SFML/Window/Clipboard.hpp \
  C:/SFML-2.5.1/include/SFML/Window/Export.hpp \
  C:/SFML-2.5.1/include/SFML/Window/Context.hpp \
@@ -71,36 +71,9 @@ bin/Debug/obj/Main.o: src/Main.cpp C:/SFML-2.5.1/include/SFML/System.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics/Glsl.inl \
  C:/SFML-2.5.1/include/SFML/Graphics/Sprite.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics/Text.hpp \
- C:/SFML-2.5.1/include/SFML/Graphics/VertexBuffer.hpp \
- C:/SFML-2.5.1/include/SFML/Audio.hpp \
- C:/SFML-2.5.1/include/SFML/Audio/InputSoundFile.hpp \
- C:/SFML-2.5.1/include/SFML/Audio/Export.hpp \
- C:/SFML-2.5.1/include/SFML/Audio/Listener.hpp \
- C:/SFML-2.5.1/include/SFML/Audio/Music.hpp \
- C:/SFML-2.5.1/include/SFML/Audio/SoundStream.hpp \
- C:/SFML-2.5.1/include/SFML/Audio/SoundSource.hpp \
- C:/SFML-2.5.1/include/SFML/Audio/AlResource.hpp \
- C:/SFML-2.5.1/include/SFML/Audio/OutputSoundFile.hpp \
- C:/SFML-2.5.1/include/SFML/Audio/Sound.hpp \
- C:/SFML-2.5.1/include/SFML/Audio/SoundBuffer.hpp \
- C:/SFML-2.5.1/include/SFML/Audio/SoundBufferRecorder.hpp \
- C:/SFML-2.5.1/include/SFML/Audio/SoundRecorder.hpp \
- C:/SFML-2.5.1/include/SFML/Audio/SoundFileFactory.hpp \
- C:/SFML-2.5.1/include/SFML/Audio/SoundFileFactory.inl \
- C:/SFML-2.5.1/include/SFML/Audio/SoundFileReader.hpp \
- C:/SFML-2.5.1/include/SFML/Audio/SoundFileWriter.hpp \
- C:/SFML-2.5.1/include/SFML/Network.hpp \
- C:/SFML-2.5.1/include/SFML/Network/Ftp.hpp \
- C:/SFML-2.5.1/include/SFML/Network/Export.hpp \
- C:/SFML-2.5.1/include/SFML/Network/TcpSocket.hpp \
- C:/SFML-2.5.1/include/SFML/Network/Socket.hpp \
- C:/SFML-2.5.1/include/SFML/Network/SocketHandle.hpp \
- C:/SFML-2.5.1/include/SFML/Network/Http.hpp \
- C:/SFML-2.5.1/include/SFML/Network/IpAddress.hpp \
- C:/SFML-2.5.1/include/SFML/Network/Packet.hpp \
- C:/SFML-2.5.1/include/SFML/Network/SocketSelector.hpp \
- C:/SFML-2.5.1/include/SFML/Network/TcpListener.hpp \
- C:/SFML-2.5.1/include/SFML/Network/UdpSocket.hpp
+ C:/SFML-2.5.1/include/SFML/Graphics/VertexBuffer.hpp
+
+C:/SFML-2.5.1/include/SFML/Window.hpp:
 
 C:/SFML-2.5.1/include/SFML/System.hpp:
 
@@ -153,8 +126,6 @@ C:/SFML-2.5.1/include/SFML/System/Vector2.inl:
 C:/SFML-2.5.1/include/SFML/System/Vector3.hpp:
 
 C:/SFML-2.5.1/include/SFML/System/Vector3.inl:
-
-C:/SFML-2.5.1/include/SFML/Window.hpp:
 
 C:/SFML-2.5.1/include/SFML/Window/Clipboard.hpp:
 
@@ -249,61 +220,3 @@ C:/SFML-2.5.1/include/SFML/Graphics/Sprite.hpp:
 C:/SFML-2.5.1/include/SFML/Graphics/Text.hpp:
 
 C:/SFML-2.5.1/include/SFML/Graphics/VertexBuffer.hpp:
-
-C:/SFML-2.5.1/include/SFML/Audio.hpp:
-
-C:/SFML-2.5.1/include/SFML/Audio/InputSoundFile.hpp:
-
-C:/SFML-2.5.1/include/SFML/Audio/Export.hpp:
-
-C:/SFML-2.5.1/include/SFML/Audio/Listener.hpp:
-
-C:/SFML-2.5.1/include/SFML/Audio/Music.hpp:
-
-C:/SFML-2.5.1/include/SFML/Audio/SoundStream.hpp:
-
-C:/SFML-2.5.1/include/SFML/Audio/SoundSource.hpp:
-
-C:/SFML-2.5.1/include/SFML/Audio/AlResource.hpp:
-
-C:/SFML-2.5.1/include/SFML/Audio/OutputSoundFile.hpp:
-
-C:/SFML-2.5.1/include/SFML/Audio/Sound.hpp:
-
-C:/SFML-2.5.1/include/SFML/Audio/SoundBuffer.hpp:
-
-C:/SFML-2.5.1/include/SFML/Audio/SoundBufferRecorder.hpp:
-
-C:/SFML-2.5.1/include/SFML/Audio/SoundRecorder.hpp:
-
-C:/SFML-2.5.1/include/SFML/Audio/SoundFileFactory.hpp:
-
-C:/SFML-2.5.1/include/SFML/Audio/SoundFileFactory.inl:
-
-C:/SFML-2.5.1/include/SFML/Audio/SoundFileReader.hpp:
-
-C:/SFML-2.5.1/include/SFML/Audio/SoundFileWriter.hpp:
-
-C:/SFML-2.5.1/include/SFML/Network.hpp:
-
-C:/SFML-2.5.1/include/SFML/Network/Ftp.hpp:
-
-C:/SFML-2.5.1/include/SFML/Network/Export.hpp:
-
-C:/SFML-2.5.1/include/SFML/Network/TcpSocket.hpp:
-
-C:/SFML-2.5.1/include/SFML/Network/Socket.hpp:
-
-C:/SFML-2.5.1/include/SFML/Network/SocketHandle.hpp:
-
-C:/SFML-2.5.1/include/SFML/Network/Http.hpp:
-
-C:/SFML-2.5.1/include/SFML/Network/IpAddress.hpp:
-
-C:/SFML-2.5.1/include/SFML/Network/Packet.hpp:
-
-C:/SFML-2.5.1/include/SFML/Network/SocketSelector.hpp:
-
-C:/SFML-2.5.1/include/SFML/Network/TcpListener.hpp:
-
-C:/SFML-2.5.1/include/SFML/Network/UdpSocket.hpp:
