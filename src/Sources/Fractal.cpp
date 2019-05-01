@@ -7,12 +7,14 @@ Fractal::Fractal() {}
 
 Fractal::~Fractal() {}
 
+//Function that calculate color between two given colors, depending on given number t (0 < t <= 1)
 sf::Color Fractal::colorInterpolate(const sf::Color &a, const sf::Color &b, double t)
 {
 	const double d = 1 - t;
 	return sf::Color(a.r * d + b.r * t, a.g * d + b.g * t, a.b * d + b.b * t);
 }
 
+//Function that calculate fractal, directly in given image
 void Fractal::calculateFractal(const int maxIteration, const int H, const int W, const double minRealCords, const double maxRealCords, const double minImCords, const double maxImCords, sf::Image &image, const bool c)
 {
 	for (int y = 0; y < H; y++)

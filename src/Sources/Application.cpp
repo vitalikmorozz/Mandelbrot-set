@@ -43,7 +43,7 @@ void Application::run()
 void Application::draw()
 {
 	updateText();
-	//Calculate and color fractal
+	//Calculate and draw fractal
 	Mandelbrote.calculateFractal(maxIteration, H, W, minRealCords, maxRealCords, minImCords, maxImCords, image, c);
 	//Transform our fractal image to texture and then to sprite
 	texture.loadFromImage(image);
