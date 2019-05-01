@@ -1,5 +1,5 @@
-bin/Release/obj/Main.o: src/Main.cpp src/Main.hpp \
- src/Win32/WindowsHelper.hpp src/Win32/Icon.h \
+bin/Release/obj/Main.o: src/Main.cpp src/Headers/Application.hpp \
+ C:/SFML-2.5.1/include/SFML/Graphics.hpp \
  C:/SFML-2.5.1/include/SFML/Window.hpp \
  C:/SFML-2.5.1/include/SFML/System.hpp \
  C:/SFML-2.5.1/include/SFML/Config.hpp \
@@ -43,7 +43,6 @@ bin/Release/obj/Main.o: src/Main.cpp src/Main.hpp \
  C:/SFML-2.5.1/include/SFML/Window/Window.hpp \
  C:/SFML-2.5.1/include/SFML/Window/WindowHandle.hpp \
  C:/SFML-2.5.1/include/SFML/Window/WindowStyle.hpp \
- C:/SFML-2.5.1/include/SFML/Graphics.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics/BlendMode.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics/Export.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics/CircleShape.hpp \
@@ -73,13 +72,12 @@ bin/Release/obj/Main.o: src/Main.cpp src/Main.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics/Glsl.inl \
  C:/SFML-2.5.1/include/SFML/Graphics/Sprite.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics/Text.hpp \
- C:/SFML-2.5.1/include/SFML/Graphics/VertexBuffer.hpp
+ C:/SFML-2.5.1/include/SFML/Graphics/VertexBuffer.hpp \
+ src/Headers/Fractal.hpp
 
-src/Main.hpp:
+src/Headers/Application.hpp:
 
-src/Win32/WindowsHelper.hpp:
-
-src/Win32/Icon.h:
+C:/SFML-2.5.1/include/SFML/Graphics.hpp:
 
 C:/SFML-2.5.1/include/SFML/Window.hpp:
 
@@ -167,8 +165,6 @@ C:/SFML-2.5.1/include/SFML/Window/WindowHandle.hpp:
 
 C:/SFML-2.5.1/include/SFML/Window/WindowStyle.hpp:
 
-C:/SFML-2.5.1/include/SFML/Graphics.hpp:
-
 C:/SFML-2.5.1/include/SFML/Graphics/BlendMode.hpp:
 
 C:/SFML-2.5.1/include/SFML/Graphics/Export.hpp:
@@ -228,3 +224,5 @@ C:/SFML-2.5.1/include/SFML/Graphics/Sprite.hpp:
 C:/SFML-2.5.1/include/SFML/Graphics/Text.hpp:
 
 C:/SFML-2.5.1/include/SFML/Graphics/VertexBuffer.hpp:
+
+src/Headers/Fractal.hpp:
