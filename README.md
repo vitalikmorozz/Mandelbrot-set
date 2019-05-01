@@ -12,3 +12,15 @@ I personaly use [VSCode](https://code.visualstudio.com/) so instruction will be 
 5. Open cloned folder with VSCode.
 6. Install the official C/C++ Extension, reload the window & wait for the dependencies to install.
 7. At this point you should be able to run a build task Ctrl+Shift+B > Build & Run:Debug
+
+# Navigation
+1.Open/Close menu: M
+2.Move Camera: W/A/S/D
+3.Zoom In: Left Click
+4.Zoom Out: Right Click
+5.Reset Zoom: R
+6.Make Screenshot: P
+7.Increase Max Iteration Count: Scroll Up
+8.Decrease Max Iteration Count: Scroll Down
+9.Change Colouring: C
+10.Close Window: Escape
