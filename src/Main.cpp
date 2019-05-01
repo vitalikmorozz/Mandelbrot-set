@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
 #include <math.h>
-#include "Main.hpp"
+//#include <Headers/Main.hpp>
+#include <Utility/Types.hpp>
 // SFML
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -18,12 +19,14 @@ double minImCords = -1, maxImCords = 1;
 bool m = 1, c = 1;
 
 //Function that calculate color between two given colours a and b, depending on given number t (0 < t <= 1)
-sf::Color colorInterpolate(sf::Color a, sf::Color b, double t)
+sf::Color colorInterpolate(const sf::Color &a, const sf::Color &b, double t)
 {
-	if (a.r < b.r && a.g < b.g && a.b < b.b)
-		return {round(a.r + abs(b.r - a.r) * t), round(a.g + abs(b.g - a.g) * t), round(a.b + abs(b.b - a.b) * t)};
-	else
-		return {round(a.r - abs(b.r - a.r) * t), round(a.g - abs(b.g - a.g) * t), round(a.b - abs(b.b - a.b) * t)};
+	auto const d = 1 - t;
+	return sf::Color(a.r * d + b.r * t, a.g * d + b.g * t, a.b * d + b.b * t);
+	// if (a.r < b.r && a.g < b.g && a.b < b.b)
+	// 	return {round(a.r + abs(b.r - a.r) * t), round(a.g + abs(b.g - a.g) * t), round(a.b + abs(b.b - a.b) * t)};
+	// else
+	// 	return {round(a.r - abs(b.r - a.r) * t), round(a.g - abs(b.g - a.g) * t), round(a.b - abs(b.b - a.b) * t)};
 }
 
 int main()
@@ -45,16 +48,16 @@ int main()
 	//Info text setup
 	sf::Text info, controls, menu;
 	info.setFont(font);
-	info.setColor(sf::Color::Black);
+	info.setFillColor(sf::Color::Black);
 	info.setCharacterSize(16);
 	//Navigation text setup
 	controls.setFont(font);
-	controls.setColor(sf::Color::Black);
+	controls.setFillColor(sf::Color::Black);
 	controls.setCharacterSize(16);
 	controls.setPosition(0, H - 185);
 	//Menu text setup
 	menu.setFont(font);
-	menu.setColor(sf::Color::Black);
+	menu.setFillColor(sf::Color::Black);
 	menu.setCharacterSize(16);
 	menu.setPosition(0, H - 20);
 	//Main loop
@@ -115,16 +118,16 @@ int main()
 					if (c)
 					{
 						c = 0;
-						info.setColor(sf::Color::White);
-						controls.setColor(sf::Color::White);
-						menu.setColor(sf::Color::White);
+						info.setFillColor(sf::Color::White);
+						controls.setFillColor(sf::Color::White);
+						menu.setFillColor(sf::Color::White);
 					}
 					else
 					{
 						c = 1;
-						info.setColor(sf::Color::Black);
-						controls.setColor(sf::Color::Black);
-						menu.setColor(sf::Color::Black);
+						info.setFillColor(sf::Color::Black);
+						controls.setFillColor(sf::Color::Black);
+						menu.setFillColor(sf::Color::Black);
 					}
 				}
 				//Close window
@@ -134,23 +137,19 @@ int main()
 			//Increase Max Iterations count
 			if (e.type == sf::Event::MouseWheelScrolled)
 			{
-				if (e.MouseWheelScrolled)
+				if (e.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel)
 				{
-
-					if (e.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel)
+					if (e.mouseWheelScroll.delta > 0)
 					{
-						if (e.mouseWheelScroll.delta > 0)
-						{
-							maxIteration += 128;
-						}
+						maxIteration += 128;
+					}
 
+					else
+					{
+						if (maxIteration == 128)
+							maxIteration = 128;
 						else
-						{
-							if (maxIteration == 128)
-								maxIteration = 128;
-							else
-								maxIteration -= 128;
-						}
+							maxIteration -= 128;
 					}
 				}
 			}
