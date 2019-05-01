@@ -57,15 +57,15 @@ void Fractal::calculateFractal(const int maxIteration, const int H, const int W,
 			}
 			//Calculate number t (0 < t <=1), depending on iterations
 			double t;
-			int colorSectionPix = maxIteration / (colors.size() - 1);
-			if (iteration < colorSectionPix)
-				t = (double)iteration / (double)colorSectionPix;
+			int itretionsPerSection = maxIteration / (colors.size() - 1);
+			if (iteration < itretionsPerSection)
+				t = (double)iteration / (double)itretionsPerSection;
 			else
-				t = (double)(iteration % colorSectionPix) / (double)colorSectionPix;
+				t = (double)(iteration % itretionsPerSection) / (double)itretionsPerSection;
 			//Find necesary two colors for point
 			int i = 0;
 			sf::Color imgColor;
-			while ((i + 1) * colorSectionPix <= iteration)
+			while ((i + 1) * itretionsPerSection <= iteration)
 				i++;
 			if (iteration == maxIteration)
 				imgColor = {0, 0, 0};

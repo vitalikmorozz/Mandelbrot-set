@@ -15,16 +15,16 @@ Application::Application()
 	}
 	//Info text setup
 	info.setFont(font);
-	info.setFillColor(sf::Color::Black);
+	info.setFillColor(sf::Color::White);
 	info.setCharacterSize(16);
 	//Navigation text setup
 	controls.setFont(font);
-	controls.setFillColor(sf::Color::Black);
+	controls.setFillColor(sf::Color::White);
 	controls.setCharacterSize(16);
 	controls.setPosition(0, H - 185);
 	//Menu text setup
 	menu.setFont(font);
-	menu.setFillColor(sf::Color::Black);
+	menu.setFillColor(sf::Color::White);
 	menu.setCharacterSize(16);
 	menu.setPosition(0, H - 20);
 }
@@ -129,16 +129,10 @@ void Application::keyActions()
 				if (c)
 				{
 					c = 0;
-					info.setFillColor(sf::Color::White);
-					controls.setFillColor(sf::Color::White);
-					menu.setFillColor(sf::Color::White);
 				}
 				else
 				{
 					c = 1;
-					info.setFillColor(sf::Color::Black);
-					controls.setFillColor(sf::Color::Black);
-					menu.setFillColor(sf::Color::Black);
 				}
 			}
 			//Close window
