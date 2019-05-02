@@ -17,6 +17,28 @@ sf::Color Fractal::colorInterpolate(const sf::Color &a, const sf::Color &b, doub
 //Function that calculate fractal, directly in given image
 void Fractal::calculateFractal(const int maxIteration, const int H, const int W, const double minRealCords, const double maxRealCords, const double minImCords, const double maxImCords, sf::Image &image, const bool c)
 {
+	//Colouring schemes
+	if (!c)
+	{
+		//Red colouring
+		colors = {
+			{0, 0, 0},
+			{213, 67, 31},
+			{251, 255, 121},
+			{62, 223, 89},
+			{43, 30, 218},
+			{0, 255, 247}};
+	}
+	else
+	{
+		//Standart colouring
+		colors = {
+			{0, 7, 100},
+			{32, 107, 203},
+			{237, 255, 255},
+			{255, 170, 0},
+			{0, 2, 0}};
+	}
 	for (int y = 0; y < H; y++)
 		for (int x = 0; x < W; x++)
 		{
@@ -33,29 +55,6 @@ void Fractal::calculateFractal(const int maxIteration, const int H, const int W,
 				if (a * a + b * b > 2 * 2)
 					break;
 				;
-			}
-			//Colouring schemes
-			std::vector<sf::Color> colors;
-			if (!c)
-			{
-				//Red colouring
-				colors = {
-					{0, 0, 0},
-					{213, 67, 31},
-					{251, 255, 121},
-					{62, 223, 89},
-					{43, 30, 218},
-					{0, 255, 247}};
-			}
-			else
-			{
-				//Standart colouring
-				colors = {
-					{0, 7, 100},
-					{32, 107, 203},
-					{237, 255, 255},
-					{255, 170, 0},
-					{0, 2, 0}};
 			}
 			//Calculate number t (0 < t <=1), depending on iterations
 			double t;
