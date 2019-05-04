@@ -1,6 +1,6 @@
 # Mandelbrot set by Moroz Vitalik 143 A2
 
-I personaly use [VSCode](https://code.visualstudio.com/) so instruction will be for VSCode. If you already have SFML installed and connected to another IDE/Code Redactor, you can only download /src folder (i hope).
+I personaly use [VSCode](https://code.visualstudio.com/) so instruction will be for VSCode. If you already have SFML installed and connected to another IDE/Code Redactor, you can only download /src folder (I hope).
 
 **Instruction is for WINDOWS**
 
@@ -27,7 +27,7 @@ I personaly use [VSCode](https://code.visualstudio.com/) so instruction will be 
 
 # Sources
 1. [Main info](https://en.wikipedia.org/wiki/Mandelbrot_set)
-2. [Standart color scheme](https://www.ultrafractal.com/help/index.html?/help/formulas/standard/mandelbrot.html)
+2. [Standard color scheme](https://www.ultrafractal.com/help/index.html?/help/formulas/standard/mandelbrot.html)
 3. [Color interpolation based on](https://en.wikipedia.org/wiki/Linear_interpolation)
 
 **All matches are random**
