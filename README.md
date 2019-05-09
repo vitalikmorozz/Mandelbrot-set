@@ -14,20 +14,15 @@ I personaly use [VSCode](https://code.visualstudio.com/) so instruction will be 
 7. At this point you should be able to run a build task Ctrl+Shift+B > Build & Run:Debug
 
 # Navigation
-1. Open/Close menu: M
-2. Move Camera: W/A/S/D
-3. Zoom In: Left Click
-4. Zoom Out: Right Click
-5. Reset Zoom: R
-6. Make Screenshot: P
-7. Increase Max Iteration Count: Scroll Up
-8. Decrease Max Iteration Count: Scroll Down
-9. Change Colouring: C
-10. Close Window: Escape
+1. Use arrows up and down to navigate in menu
+2. Press Enter to enter in menu item
+3. Press Esc to exit back into menu
+4. See Navigation Item for more information
 
 # Sources
-1. [Main info](https://en.wikipedia.org/wiki/Mandelbrot_set)
-2. [Standard color scheme](https://www.ultrafractal.com/help/index.html?/help/formulas/standard/mandelbrot.html)
-3. [Color interpolation based on](https://en.wikipedia.org/wiki/Linear_interpolation)
+1. [Main tech info](https://www.sfml-dev.org/learn.php)
+2. [Main theoretical info](https://en.wikipedia.org/wiki/Mandelbrot_set)
+3. [Standard color scheme](https://www.ultrafractal.com/help/index.html?/help/formulas/standard/mandelbrot.html)
+4. [Color interpolation based on](https://en.wikipedia.org/wiki/Linear_interpolation)
 
 **All matches are random**

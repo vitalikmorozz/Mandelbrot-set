@@ -31,7 +31,7 @@ private:
 	int maxIteration;
 	long long int zoom;
 	double minRealCords, maxRealCords, minImCords, maxImCords;
-	bool m, c;
+	bool c;
 	Mandelbrot Mandelbrote;
 	Menu Menu;
 

@@ -27,7 +27,6 @@ Application::Application()
 	zoom = 1;
 	minRealCords = -2.5, maxRealCords = 1;
 	minImCords = -1, maxImCords = 1;
-	m = 1;
 	c = 1;
 }
 
@@ -155,14 +154,6 @@ void Application::keyActions(bool a)
 			//Make screenshot
 			if (e.key.code == sf::Keyboard::Key::P)
 				image.saveToFile("./img.jpg");
-			//Menu open/close
-			if (e.key.code == sf::Keyboard::Key::M)
-			{
-				if (m)
-					m = 0;
-				else
-					m = 1;
-			}
 			//Change colouring scheme
 			if (e.key.code == sf::Keyboard::Key::C)
 			{
