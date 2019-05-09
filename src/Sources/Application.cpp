@@ -17,16 +17,18 @@ Application::Application()
 	info.setFont(font);
 	info.setFillColor(sf::Color::White);
 	info.setCharacterSize(16);
-	//Navigation text setup
-	controls.setFont(font);
-	controls.setFillColor(sf::Color::White);
-	controls.setCharacterSize(16);
-	controls.setPosition(0, H - 185);
 	//Menu text setup
 	menu.setFont(font);
 	menu.setFillColor(sf::Color::White);
 	menu.setCharacterSize(16);
 	menu.setPosition(0, H - 20);
+	//Setting setup
+	maxIteration = 128;
+	zoom = 1;
+	minRealCords = -2.5, maxRealCords = 1;
+	minImCords = -1, maxImCords = 1;
+	m = 1;
+	c = 1;
 }
 
 Application::~Application() {}
@@ -35,8 +37,17 @@ void Application::run()
 {
 	while (window.isOpen())
 	{
+		Menu.draw(window);
+		keyActions(true);
+	}
+}
+
+void Application::start()
+{
+	while (window.isOpen())
+	{
 		draw();
-		keyActions();
+		keyActions(false);
 	}
 }
 
@@ -44,7 +55,7 @@ void Application::draw()
 {
 	updateText();
 	//Calculate and draw fractal
-	Mandelbrote.calculateFractal(maxIteration, H, W, minRealCords, maxRealCords, minImCords, maxImCords, image, c);
+	Mandelbrote.drawFractal(maxIteration, H, W, minRealCords, maxRealCords, minImCords, maxImCords, image, c);
 	//Transform our fractal image to texture and then to sprite
 	texture.loadFromImage(image);
 	sprite.setTexture(texture);
@@ -52,33 +63,62 @@ void Application::draw()
 	//Drawing all texts and Fractal sprite
 	window.draw(sprite);
 	window.draw(info);
-	if (m)
-		window.draw(menu);
-	else
-		window.draw(controls);
+	window.draw(menu);
 	//Displaying result picture
 	window.display();
 }
 
-void Application::updateText(){
+void Application::updateText()
+{
 	std::string infoText = "Current zoom: x" + std::to_string(zoom) + "\nMax iterations: " + std::to_string(maxIteration);
 	info.setString(infoText);
-	//Navigation info text
-	std::string controlsText = "Navigation:\nMove: W/A/S/D\nZoom In: Left Click\nZoom Out: Right Click\nReset Zoom: R\nMake Screenshot: P\nIncrease Max Iteration: Scroll Up\nDecrease Max Iteration: Scroll Down\nChange colouring: C\nClose: Escape";
-	controls.setString(controlsText);
 	//"Show menu" text
-	std::string menuText = "Show menu: M";
+	std::string menuText = "Exit to menu: Escape";
 	menu.setString(menuText);
 }
 
-void Application::keyActions()
+void Application::keyActions(bool a)
 {
 	sf::Event e;
 	while (window.pollEvent(e))
 	{
 		if (e.type == sf::Event::Closed)
 			window.close();
-		if (e.type == sf::Event::KeyPressed)
+		if (a && e.type == sf::Event::KeyPressed)
+		{
+			//Exit
+			if (e.key.code == sf::Keyboard::Key::Escape)
+				window.close();
+			//Select up menu item
+			if (e.key.code == sf::Keyboard::Key::Up)
+			{
+				Menu.MenuUp();
+			}
+			//Select down menu item
+			if (e.key.code == sf::Keyboard::Key::Down)
+			{
+				Menu.MenuDown();
+			}
+			if (e.key.code == sf::Keyboard::Key::Return)
+			{
+				switch (Menu.getSelectedItem())
+				{
+				case 0:
+					start();
+					break;
+				case 1:
+					Menu.navigation(window);
+					break;
+				case 2:
+					window.close();
+					break;
+
+				default:
+					break;
+				}
+			}
+		}
+		if (!a && e.type == sf::Event::KeyPressed)
 		{
 			//Reset feature
 			if (e.key.code == sf::Keyboard::Key::R)
@@ -135,9 +175,9 @@ void Application::keyActions()
 					c = 1;
 				}
 			}
-			//Close window
+			//Exit to menu
 			if (e.key.code == sf::Keyboard::Key::Escape)
-				window.close();
+				run();
 		}
 		//Increase Max Iterations count
 		if (e.type == sf::Event::MouseWheelScrolled)

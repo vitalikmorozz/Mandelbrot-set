@@ -1,4 +1,4 @@
-bin/Release/obj/Main.o: src/Main.cpp src/Headers/Application.hpp \
+bin/Debug/obj/Sources/Menu.o: src/Sources/Menu.cpp src/Headers/Menu.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics.hpp \
  C:/SFML-2.5.1/include/SFML/Window.hpp \
  C:/SFML-2.5.1/include/SFML/System.hpp \
@@ -72,10 +72,9 @@ bin/Release/obj/Main.o: src/Main.cpp src/Headers/Application.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics/Glsl.inl \
  C:/SFML-2.5.1/include/SFML/Graphics/Sprite.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics/Text.hpp \
- C:/SFML-2.5.1/include/SFML/Graphics/VertexBuffer.hpp \
- src/Headers/Mandelbrot.hpp src/Headers/Fractal.hpp src/Headers/Menu.hpp
+ C:/SFML-2.5.1/include/SFML/Graphics/VertexBuffer.hpp
 
-src/Headers/Application.hpp:
+src/Headers/Menu.hpp:
 
 C:/SFML-2.5.1/include/SFML/Graphics.hpp:
 
@@ -224,9 +223,3 @@ C:/SFML-2.5.1/include/SFML/Graphics/Sprite.hpp:
 C:/SFML-2.5.1/include/SFML/Graphics/Text.hpp:
 
 C:/SFML-2.5.1/include/SFML/Graphics/VertexBuffer.hpp:
-
-src/Headers/Mandelbrot.hpp:
-
-src/Headers/Fractal.hpp:
-
-src/Headers/Menu.hpp:

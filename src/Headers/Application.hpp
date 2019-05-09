@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
-#include "Headers/Fractal.hpp"
+#include "Mandelbrot.hpp"
+#include "Menu.hpp"
 
 class Application
 {
@@ -8,9 +9,11 @@ public:
 	Application();
 	virtual ~Application();
 	void run();
+
 private:
+	void start();
 	void draw();
-	void keyActions();
+	void keyActions(bool);
 	void updateText();
 
 	//Window setup
@@ -21,17 +24,16 @@ private:
 	//Font
 	sf::Font font;
 	//Texts
-	sf::Text info, controls, menu;
+	sf::Text info, menu;
 
 	//Main settings
-	const int W = 1366;
-	const int H = 768;
-	const int zoomValue = 5;
-	int maxIteration = 128;
-	int zoom = 1;
-	double minRealCords = -2.5, maxRealCords = 1;
-	double minImCords = -1, maxImCords = 1;
-	bool m = 1, c = 1;
-	Fractal Mandelbrote;
+	const int W = 1366, H = 768, zoomValue = 5;
+	int maxIteration;
+	long long int zoom;
+	double minRealCords, maxRealCords, minImCords, maxImCords;
+	bool m, c;
+	Mandelbrot Mandelbrote;
+	Menu Menu;
+
 protected:
 };

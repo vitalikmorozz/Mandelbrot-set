@@ -1,5 +1,5 @@
-bin/Release/obj/Main.o: src/Main.cpp src/Headers/Application.hpp \
- C:/SFML-2.5.1/include/SFML/Graphics.hpp \
+bin/Debug/obj/Sources/Mandelbrot.o: src/Sources/Mandelbrot.cpp \
+ src/Headers/Mandelbrot.hpp C:/SFML-2.5.1/include/SFML/Graphics.hpp \
  C:/SFML-2.5.1/include/SFML/Window.hpp \
  C:/SFML-2.5.1/include/SFML/System.hpp \
  C:/SFML-2.5.1/include/SFML/Config.hpp \
@@ -73,9 +73,9 @@ bin/Release/obj/Main.o: src/Main.cpp src/Headers/Application.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics/Sprite.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics/Text.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics/VertexBuffer.hpp \
- src/Headers/Mandelbrot.hpp src/Headers/Fractal.hpp src/Headers/Menu.hpp
+ src/Headers/Fractal.hpp
 
-src/Headers/Application.hpp:
+src/Headers/Mandelbrot.hpp:
 
 C:/SFML-2.5.1/include/SFML/Graphics.hpp:
 
@@ -225,8 +225,4 @@ C:/SFML-2.5.1/include/SFML/Graphics/Text.hpp:
 
 C:/SFML-2.5.1/include/SFML/Graphics/VertexBuffer.hpp:
 
-src/Headers/Mandelbrot.hpp:
-
 src/Headers/Fractal.hpp:
-
-src/Headers/Menu.hpp:

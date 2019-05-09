@@ -73,7 +73,7 @@ bin/Debug/obj/Sources/Application.o: src/Sources/Application.cpp \
  C:/SFML-2.5.1/include/SFML/Graphics/Sprite.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics/Text.hpp \
  C:/SFML-2.5.1/include/SFML/Graphics/VertexBuffer.hpp \
- src/Headers/Fractal.hpp
+ src/Headers/Mandelbrot.hpp src/Headers/Fractal.hpp src/Headers/Menu.hpp
 
 src/Headers/Application.hpp:
 
@@ -225,4 +225,8 @@ C:/SFML-2.5.1/include/SFML/Graphics/Text.hpp:
 
 C:/SFML-2.5.1/include/SFML/Graphics/VertexBuffer.hpp:
 
+src/Headers/Mandelbrot.hpp:
+
 src/Headers/Fractal.hpp:
+
+src/Headers/Menu.hpp:

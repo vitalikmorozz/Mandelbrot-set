@@ -7,6 +7,14 @@ Fractal::Fractal() {}
 
 Fractal::~Fractal() {}
 
+void Fractal::drawFractal(const int H, const int W, sf::Image &image){
+	for (int y = 0; y < H; y++)
+		for (int x = 0; x < W; x++)
+		{
+			image.setPixel(x, y, sf::Color(0,0,0));
+		}
+}
+
 //Function that calculate color between two given colors, depending on given number t (0 < t <= 1)
 sf::Color Fractal::colorInterpolate(const sf::Color &a, const sf::Color &b, double t)
 {
@@ -56,14 +64,14 @@ void Fractal::calculateFractal(const int maxIteration, const int H, const int W,
 					break;
 				;
 			}
-			//Calculate number t (0 < t <=1), depending on iterations
+			//Calculate number t (0 < t <=1), depending on iterations count
 			double t;
 			int itretionsPerSection = maxIteration / (colors.size() - 1);
 			if (iteration < itretionsPerSection)
 				t = (double)iteration / (double)itretionsPerSection;
 			else
 				t = (double)(iteration % itretionsPerSection) / (double)itretionsPerSection;
-			//Find necesary two colors for point
+			//Find necesary two colors for each point
 			int i = 0;
 			sf::Color imgColor;
 			while ((i + 1) * itretionsPerSection <= iteration)
