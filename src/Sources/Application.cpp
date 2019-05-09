@@ -37,16 +37,18 @@ void Application::run()
 	while (window.isOpen())
 	{
 		Menu.draw(window);
-		keyActions(true);
+		menuKeyActions();
 	}
 }
 
 void Application::start()
 {
+	minRealCords = -2.5, maxRealCords = 1;
+	minImCords = -1, maxImCords = 1;
 	while (window.isOpen())
 	{
 		draw();
-		keyActions(false);
+		keyActions();
 	}
 }
 
@@ -76,48 +78,14 @@ void Application::updateText()
 	menu.setString(menuText);
 }
 
-void Application::keyActions(bool a)
+void Application::keyActions()
 {
 	sf::Event e;
 	while (window.pollEvent(e))
 	{
 		if (e.type == sf::Event::Closed)
 			window.close();
-		if (a && e.type == sf::Event::KeyPressed)
-		{
-			//Exit
-			if (e.key.code == sf::Keyboard::Key::Escape)
-				window.close();
-			//Select up menu item
-			if (e.key.code == sf::Keyboard::Key::Up)
-			{
-				Menu.MenuUp();
-			}
-			//Select down menu item
-			if (e.key.code == sf::Keyboard::Key::Down)
-			{
-				Menu.MenuDown();
-			}
-			if (e.key.code == sf::Keyboard::Key::Return)
-			{
-				switch (Menu.getSelectedItem())
-				{
-				case 0:
-					start();
-					break;
-				case 1:
-					Menu.navigation(window);
-					break;
-				case 2:
-					window.close();
-					break;
-
-				default:
-					break;
-				}
-			}
-		}
-		if (!a && e.type == sf::Event::KeyPressed)
+		if (e.type == sf::Event::KeyPressed)
 		{
 			//Reset feature
 			if (e.key.code == sf::Keyboard::Key::R)
@@ -234,6 +202,68 @@ void Application::keyActions(bool a)
 				zoom /= 5;
 				if (zoom == 0)
 					zoom = 1;
+			}
+		}
+	}
+}
+
+void Application::menuKeyActions()
+{
+	sf::Event e;
+	while (window.pollEvent(e))
+	{
+		if (e.type == sf::Event::Closed)
+			window.close();
+		if (e.type == sf::Event::MouseButtonPressed)
+			if (e.mouseButton.button == sf::Mouse::Left)
+				switch (Menu.getSelectedItem())
+				{
+				case 0:
+					start();
+					break;
+				case 1:
+					Menu.navigation(window);
+					break;
+				case 2:
+					window.close();
+					break;
+
+				default:
+					break;
+				}
+
+		if (e.type == sf::Event::KeyPressed)
+		{
+			//Exit
+			if (e.key.code == sf::Keyboard::Key::Escape)
+				window.close();
+			//Select up menu item
+			if (e.key.code == sf::Keyboard::Key::Up)
+			{
+				Menu.MenuUp();
+			}
+			//Select down menu item
+			if (e.key.code == sf::Keyboard::Key::Down)
+			{
+				Menu.MenuDown();
+			}
+			if (e.key.code == sf::Keyboard::Key::Return)
+			{
+				switch (Menu.getSelectedItem())
+				{
+				case 0:
+					start();
+					break;
+				case 1:
+					Menu.navigation(window);
+					break;
+				case 2:
+					window.close();
+					break;
+
+				default:
+					break;
+				}
 			}
 		}
 	}

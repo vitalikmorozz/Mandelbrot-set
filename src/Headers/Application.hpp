@@ -13,7 +13,8 @@ public:
 private:
 	void start();
 	void draw();
-	void keyActions(bool);
+	void keyActions();
+	void menuKeyActions();
 	void updateText();
 
 	//Window setup

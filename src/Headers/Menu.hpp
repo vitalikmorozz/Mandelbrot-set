@@ -5,7 +5,7 @@
 class Menu
 {
 private:
-	sf::Text menuItems[3], nav;
+	sf::Text menuItems[3], nav, back, title;
 	sf::Font font;
 	sf::Texture backgroundTexture;
 	sf::Sprite background;
