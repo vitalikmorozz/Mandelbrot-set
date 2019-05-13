@@ -11,11 +11,11 @@ Menu::Menu()
 	}
 	//Main menu items text setup
 	menuItems[0].setFont(font);
-	menuItems[0].setString("Draw!");
+	menuItems[0].setString("- Draw! -");
 	menuItems[1].setFont(font);
-	menuItems[1].setString("Navigation");
+	menuItems[1].setString("- Controls -");
 	menuItems[2].setFont(font);
-	menuItems[2].setString("Exit");
+	menuItems[2].setString("- Exit -");
 
 	selectedItem = 0;
 	//Background image loading
@@ -27,22 +27,22 @@ Menu::Menu()
 	//Navigation info text
 	nav.setFont(font);
 	nav.setCharacterSize(40);
-	nav.setOutlineThickness(2.0);
+	nav.setOutlineThickness(1.0);
 	nav.setFillColor(sf::Color::White);
 	std::string controlsText = "Move Camera: W/A/S/D\nZoom In: Left Click\nZoom Out: Right Click\nReset Zoom: R\nMake Screenshot: P\nIncrease Max Iteration: Scroll Up\nDecrease Max Iteration: Scroll Down\nChange colouring: C";
 	nav.setString(controlsText);
 	//Back text
 	back.setFont(font);
 	back.setCharacterSize(40);
-	back.setOutlineThickness(2.0);
+	back.setOutlineThickness(1.0);
 	back.setFillColor(sf::Color::White);
-	back.setString("Back to menu");
+	back.setString("- Back to menu -");
 	//Title text
 	title.setFont(font);
 	title.setCharacterSize(60);
-	title.setOutlineThickness(2.0);
+	title.setOutlineThickness(1.0);
 	title.setFillColor(sf::Color::White);
-	title.setString("Mandelbrot Set");
+	title.setString("Mandelbrot Set Builder");
 	title.setStyle(sf::Text::Bold);
 }
 
@@ -51,7 +51,7 @@ Menu::~Menu() {}
 //Main menu draw
 void Menu::draw(sf::RenderWindow &window)
 {
-	window.clear();
+	window.clear(sf::Color::Yellow);
 
 	int with = window.getSize().x;
 	int height = window.getSize().y;
@@ -66,11 +66,11 @@ void Menu::draw(sf::RenderWindow &window)
 	menuItems[1].setPosition(with / 2, height / 2 + 0 * 60);
 	menuItems[2].setPosition(with / 2, height / 2 + 1 * 60);
 	//Triger mouse hover each menu item
-	if (sf::IntRect(with / 2 - 150, height / 2 - 1 * 60, 300, 40).contains(sf::Mouse::getPosition(window)))
+	if (sf::IntRect(with / 2 - 150, height / 2 - 20 - 1 * 60, 300, 40).contains(sf::Mouse::getPosition(window)))
 		selectedItem = 0;
-	if (sf::IntRect(with / 2 - 150, height / 2 + 0 * 60, 300, 40).contains(sf::Mouse::getPosition(window)))
+	if (sf::IntRect(with / 2 - 150, height / 2 - 20 + 0 * 60, 300, 40).contains(sf::Mouse::getPosition(window)))
 		selectedItem = 1;
-	if (sf::IntRect(with / 2 - 150, height / 2 + 1 * 60, 300, 40).contains(sf::Mouse::getPosition(window)))
+	if (sf::IntRect(with / 2 - 150, height / 2 - 20 + 1 * 60, 300, 40).contains(sf::Mouse::getPosition(window)))
 		selectedItem = 2;
 	//Response on our actions
 	for (int i = 0; i < 3; i++)
@@ -89,7 +89,7 @@ void Menu::draw(sf::RenderWindow &window)
 		sf::FloatRect textRect = menuItems[i].getLocalBounds();
 		menuItems[i].setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
 		menuItems[i].setCharacterSize(40);
-		menuItems[i].setOutlineThickness(2.0);
+		menuItems[i].setOutlineThickness(1.0);
 
 		window.draw(menuItems[i]);
 	}

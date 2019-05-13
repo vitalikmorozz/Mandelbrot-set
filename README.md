@@ -15,7 +15,7 @@ I personaly use [VSCode](https://code.visualstudio.com/) so instruction will be 
 
 # Navigation
 1. Use mouse to navigate in menu
-2. See Navigation in Menu for more info
+2. See Controls for more info
 
 # Sources
 1. [Main tech info](https://www.sfml-dev.org/learn.php)

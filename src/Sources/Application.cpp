@@ -121,7 +121,7 @@ void Application::keyActions()
 			}
 			//Make screenshot
 			if (e.key.code == sf::Keyboard::Key::P)
-				image.saveToFile("./img.jpg");
+				image.saveToFile("./screenshot.jpg");
 			//Change colouring scheme
 			if (e.key.code == sf::Keyboard::Key::C)
 			{
