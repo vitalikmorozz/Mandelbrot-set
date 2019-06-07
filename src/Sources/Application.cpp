@@ -43,8 +43,6 @@ void Application::run()
 
 void Application::start()
 {
-	minRealCords = -2.5, maxRealCords = 1;
-	minImCords = -1, maxImCords = 1;
 	while (window.isOpen())
 	{
 		draw();

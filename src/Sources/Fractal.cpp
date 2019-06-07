@@ -16,7 +16,7 @@ void Fractal::drawFractal(const int H, const int W, sf::Image &image){
 }
 
 //Function that calculate color between two given colors, depending on given number t (0 < t <= 1)
-sf::Color Fractal::colorInterpolate(const sf::Color &a, const sf::Color &b, double t)
+inline sf::Color Fractal::colorInterpolate(const sf::Color &a, const sf::Color &b, double t)
 {
 	return sf::Color(a.r * (1 - t) + b.r * t, a.g * (1 - t) + b.g * t, a.b * (1 - t) + b.b * t);
 }
@@ -49,7 +49,7 @@ void Fractal::calculateFractal(const int maxIteration, const int H, const int W,
 	for (int y = 0; y < H; y++)
 		for (int x = 0; x < W; x++)
 		{
-			//Scaling coord to out with and height
+			//Scaling coord to our with and height
 			double scaledX = minRealCords + (maxRealCords - minRealCords) * x / W;
 			double scaledY = minImCords + (maxImCords - minImCords) * y / H;
 			double a = 0, b = 0;
@@ -60,7 +60,7 @@ void Fractal::calculateFractal(const int maxIteration, const int H, const int W,
 				b = 2 * a * b + scaledY;
 				a = tempX;
 
-				if (a * a + b * b > 5)
+				if (a * a + b * b > 4)
 					break;
 				;
 			}

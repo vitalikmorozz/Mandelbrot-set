@@ -10,7 +10,7 @@ public:
 
 protected:
 	virtual void calculateFractal(const int maxIteration, const int H, const int W, const double minRealCords, const double maxRealCords, const double minImCords, const double maxImCords, sf::Image &image, const bool c);
-	virtual sf::Color colorInterpolate(const sf::Color &a, const sf::Color &b, double t);
+	virtual inline sf::Color colorInterpolate(const sf::Color &a, const sf::Color &b, double t);
 
 	std::vector<sf::Color> colors;
 };

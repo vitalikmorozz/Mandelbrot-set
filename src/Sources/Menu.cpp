@@ -31,7 +31,7 @@ Menu::Menu()
 	nav.setFillColor(sf::Color::White);
 	std::string controlsText = "Move Camera: W/A/S/D\nZoom In: Left Click\nZoom Out: Right Click\nReset Zoom: R\nMake Screenshot: P\nIncrease Max Iteration: Scroll Up\nDecrease Max Iteration: Scroll Down\nChange colouring: C";
 	nav.setString(controlsText);
-	//Back text
+	//"Back to menu" text
 	back.setFont(font);
 	back.setCharacterSize(40);
 	back.setOutlineThickness(1.0);
@@ -93,7 +93,7 @@ void Menu::draw(sf::RenderWindow &window)
 
 		window.draw(menuItems[i]);
 	}
-	//"Mandelbrot Set" text in main menu
+	//"Mandelbrot Set Builder" text in main menu
 	title.setPosition(with / 2, 80);
 	sf::FloatRect textRect = title.getLocalBounds();
 	title.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top + textRect.height / 2.0f);
